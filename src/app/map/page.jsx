@@ -1,18 +1,17 @@
 "use client";
 import styles from "./page.module.css";
 import { MapContainer, TileLayer } from "react-leaflet";
-import { useRef } from "react";
 import "leaflet/dist/leaflet.css";
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
+import "leaflet-defaulticon-compatibility";
 
 export default function Map() {
-  const mapRef = useRef(null);
   return (
     <MapContainer
-      ref={mapRef}
       center={[-43.5321, 172.6362]}
       zoom={5}
       maxZoom={19}
-      minZoom={3}
+      minZoom={10}
       className={styles.map}
       placeholder={<div>this is a placeholder</div>}
     >
