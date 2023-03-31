@@ -1,10 +1,10 @@
 "use Client";
 import L from "leaflet";
-import routes from "../data/routes";
+import stops from "../data/stops";
 import { Marker, useMapEvents, Popup } from "react-leaflet";
 import { useState } from "react";
 
-export default function Routes() {
+export default function Stops() {
   const [zoom, setZoom] = useState(14);
   const getIcon = () => {
     if (zoom > 12 && zoom < 15) {
@@ -38,8 +38,8 @@ export default function Routes() {
       setZoom(currentZoom);
     },
   });
-  return routes && zoom > 12 ? (
-    routes.map((r) => {
+  return stops && zoom > 12 ? (
+    stops.map((r) => {
       return (
         <Marker
           icon={getIcon()}
