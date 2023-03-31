@@ -1,6 +1,6 @@
 "use client";
 import styles from "./page.module.css";
-import Stops from "./Stops";
+import Stops from "@/components/Stops";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";

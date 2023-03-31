@@ -1,6 +1,6 @@
-"use Client";
+"use client";
 import L from "leaflet";
-import stops from "../data/stops";
+import stops from "../../app/data/stops.json";
 import { Marker, useMapEvents, Popup } from "react-leaflet";
 import { useState } from "react";
 

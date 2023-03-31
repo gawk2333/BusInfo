@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <div className={styles.grid}>
-      <Link href="/map" className={styles.card}>
+      <Link href="/map/" className={styles.card}>
         <h2 className={inter.className}>
           Map <span>-&gt;</span>
         </h2>
