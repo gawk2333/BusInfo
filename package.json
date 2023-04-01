@@ -27,6 +27,7 @@
     "jszip-utils": "^0.1.0",
     "leaflet": "^1.9.3",
     "leaflet-defaulticon-compatibility": "^0.1.1",
+    "mongodb": "^5.1.0",
     "next": "13.2.4",
     "node-fetch": "^2.6.9",
     "react": "18.2.0",

@@ -1,0 +1,11 @@
+.navbar {
+  display: flex;
+  width: 100vw;
+  height: 2em;
+  flex-direction: row;
+  margin-top: 5px;
+}
+.nav {
+  margin-left: 5px;
+  color: bisque;
+}
