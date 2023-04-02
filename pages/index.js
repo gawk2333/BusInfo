@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import { initDefaultConnection } from "@/lib/mongodb/mongodb";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,11 +20,18 @@ export default function Home() {
           <h2 className={inter.className}>
             Map <span>-&gt;</span>
           </h2>
-          <p className={inter.className}>
-            Find the bus stop number from the map.
-          </p>
+          <p className={inter.className}>Find the bus stop from the map.</p>
         </Link>
       </div>
     </>
   );
+}
+
+export async function getStaticProps() {
+  initDefaultConnection().then(async () => {
+    console.log(" CONNECTED TO MONGO ");
+  });
+  return {
+    props: {},
+  };
 }
