@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { getAllStops } from "../api/stopsRoute";
+import { getAllStops } from "../api/stops";
 
 export default function MapPage({ stops }) {
   const Map = dynamic(() => import("@/components/Map"), {
