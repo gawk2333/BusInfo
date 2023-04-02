@@ -16,9 +16,6 @@ export async function getAllStops() {
     });
     const stops = await stopsCursor.toArray();
     return stops;
-    //
-    // Then you can execute queries against your database like so:
-    // db.find({}) or any of the MongoDB Node Driver commands
   } catch (e) {
     console.error(e);
   }
