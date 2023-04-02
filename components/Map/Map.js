@@ -6,7 +6,7 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
 
-export default function Map() {
+export default function Map({ stops }) {
   return (
     <MapContainer
       center={[-43.5321, 172.6362]}
@@ -16,7 +16,7 @@ export default function Map() {
       className={styles.map}
       placeholder={<div>this is a placeholder</div>}
     >
-      <Stops />
+      <Stops stops={stops} />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

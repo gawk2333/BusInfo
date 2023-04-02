@@ -1,11 +1,11 @@
 "use client";
 import L from "leaflet";
 // import { getAllStops } from "@/app/api/stopsAPI";
-import stops from "@/data/stops";
+// import stops from "@/data/stops";
 import { Marker, useMapEvents, Popup } from "react-leaflet";
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 
-export default function Stops() {
+export default function Stops({ stops }) {
   const [zoom, setZoom] = useState(14);
   // const [stops, setStops] = useState(null);
 
