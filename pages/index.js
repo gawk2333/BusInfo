@@ -2,7 +2,6 @@ import Head from "next/head";
 import Link from "next/link";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { initDefaultConnection } from "@/lib/mongodb/mongodb";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,13 +24,4 @@ export default function Home() {
       </div>
     </>
   );
-}
-
-export async function getStaticProps() {
-  initDefaultConnection().then(async () => {
-    console.log(" CONNECTED TO MONGO ");
-  });
-  return {
-    props: {},
-  };
 }

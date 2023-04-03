@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import { getAllStops } from "../api/stops";
+import { initDefaultConnection } from "@/lib/mongodb/mongodb";
 
 export default function MapPage({ stops }) {
   const Map = dynamic(() => import("@/components/Map"), {
@@ -10,10 +11,13 @@ export default function MapPage({ stops }) {
 }
 
 export async function getStaticProps() {
-  const result = await getAllStops();
+  initDefaultConnection().then(async () => {
+    console.log(" CONNECTED TO MONGO ");
+  });
+  const stops = await getAllStops();
   return {
     props: {
-      stops: JSON.stringify(result),
+      stops: JSON.stringify(stops),
     },
   };
 }
