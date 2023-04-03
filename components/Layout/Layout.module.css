@@ -3,6 +3,6 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  /* padding: 6rem; */
-  min-height: calc(100vh-2em);
+  padding: 0;
+  height: calc(100vh-2rem);
 }

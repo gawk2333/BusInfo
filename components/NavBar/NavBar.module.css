@@ -1,7 +1,7 @@
 .navbar {
   display: flex;
   width: 100vw;
-  height: 2em;
+  height: 2rem;
   flex-direction: row;
   margin-top: 5px;
 }
