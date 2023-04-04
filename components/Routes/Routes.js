@@ -1,10 +1,7 @@
 import { useMap, LayersControl, LayerGroup } from "react-leaflet";
+// import { useEffect } from "react";
 
 export default function Routes({ routes }) {
-  // console.log("Routes", routes);
-  // const fetchRoutePath = (routeId) => {
-
-  // }
   return (
     <LayersControl position="topright">
       {routes &&
