@@ -27,12 +27,14 @@
     "jszip-utils": "^0.1.0",
     "leaflet": "^1.9.3",
     "leaflet-defaulticon-compatibility": "^0.1.1",
-    "mongoose": "^7.0.3",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.1.8",
     "next": "13.2.4",
     "node-fetch": "^2.6.9",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-leaflet": "^4.2.1"
+    "react-leaflet": "^4.2.1",
+    "swr": "^2.1.2"
   },
   "devDependencies": {
     "eslint-plugin-prettier": "^4.2.1",
