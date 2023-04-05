@@ -30,7 +30,7 @@ export async function getStaticProps() {
         "Content-Type": "application/json",
       },
     });
-    console.log("responses:", stopsRes, routeRes);
+    console.log("responses:", stopsRes.body, routeRes.body);
     const stopsJson = await stopsRes.json();
     const routesJson = await routeRes.json();
     console.log("jsons:", stopsJson, routesJson);
