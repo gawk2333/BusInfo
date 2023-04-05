@@ -55,7 +55,7 @@ export default function Routes({ routes }) {
         .then(({ error, data, message }) => {
           if (!error) {
             const fetchedTripsCopy = _.cloneDeep(fetchedTrips);
-            fetchedTripsCopy[layerId] = data;
+            fetchedTripsCopy[layerId] = JSON.parse(data);
             setFetchedTrips(fetchedTripsCopy);
           } else {
             console.log(message);
@@ -79,7 +79,8 @@ export default function Routes({ routes }) {
 
   useEffect(() => {
     fetchTripsLayer();
-  }, [fetchTripsLayer, selectedLayer]);
+    console.log("trips", fetchedTrips);
+  }, [fetchTripsLayer, fetchedTrips]);
 
   return (
     <LayersControl position="topright">
@@ -91,12 +92,16 @@ export default function Routes({ routes }) {
               key={r.route_id}
             >
               <LayerGroup name={`${r.route_id} ${r.route_long_name}`}>
-                {fetchedTrips[r.route_id] && (
-                  <Polyline
-                    pathOptions={{ color: `#${r.route_color}`, weight: 5 }}
-                    positions={fetchedTrips[r.route_id]}
-                  />
-                )}
+                {fetchedTrips[r.route_id] &&
+                  fetchedTrips[r.route_id].map((eachPath) => {
+                    return (
+                      <Polyline
+                        key={eachPath._id}
+                        pathOptions={{ color: `#${r.route_color}`, weight: 5 }}
+                        positions={eachPath.shape_pts}
+                      />
+                    );
+                  })}
               </LayerGroup>
             </LayersControl.Overlay>
           );

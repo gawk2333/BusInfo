@@ -7,30 +7,57 @@ export default async function handler(req, res) {
     // However you can use another database (e.g. myDatabase) by replacing the `await clientPromise` with the following code:
     //
     const { routeId } = req.body;
+
     switch (req.method) {
       case "POST":
-        const { shape_id } = await TripsModel.findOne({
-          route_id: routeId,
-        }).select({
-          shape_id: 1,
-        });
-        if (shape_id) {
-          const shapeInfo = await ShapesModel.find({ shape_id: shape_id })
-            .select({
-              shape_pt_lat: 1,
-              shape_pt_lon: 1,
-              shape_pt_sequence: 1,
+        const trips = await TripsModel.find({ route_id: routeId })
+          .distinct("shape_id")
+          .exec();
+
+        const uniqueTrips = await Promise.all(
+          trips.map(async (shapeId) => {
+            const trip = await TripsModel.findOne({
+              route_id: routeId,
+              shape_id: shapeId,
             })
-            .exec();
+              .select({ trip_headsign: 1, shape_id: 1, _id: 0 })
+              .lean();
+            return trip;
+          })
+        );
+        console.log("unique", uniqueTrips);
+        if (uniqueTrips) {
+          const shapeInfo = await ShapesModel.aggregate([
+            {
+              $match: { shape_id: { $in: uniqueTrips.map((t) => t.shape_id) } },
+            },
+            {
+              $group: {
+                _id: "$shape_id",
+                shape_pts: {
+                  $push: {
+                    shape_pt_lat: "$shape_pt_lat",
+                    shape_pt_lon: "$shape_pt_lon",
+                    shape_pt_sequence: "$shape_pt_sequence",
+                  },
+                },
+              },
+            },
+          ]).exec();
+          console.log(shapeInfo);
           if (shapeInfo && shapeInfo.length !== 0) {
-            const shape = shapeInfo
-              .sort((a, b) => a.shape_pt_sequence - b.shape_pt_sequence)
-              .map((s) => {
-                return [s.shape_pt_lat, s.shape_pt_lon];
-              });
+            const shapes = shapeInfo.map((shape) => {
+              const sortedShapePts = shape.shape_pts
+                .sort((a, b) => a.shape_pt_sequence - b.shape_pt_sequence)
+                .map((s) => {
+                  return [s.shape_pt_lat, s.shape_pt_lon];
+                });
+              return { ...shape, shape_pts: sortedShapePts };
+            });
+            // console.log(JSON.stringify(shapes));
             res.json({
               error: false,
-              data: shape,
+              data: JSON.stringify(shapes),
             });
           } else {
             res.json({

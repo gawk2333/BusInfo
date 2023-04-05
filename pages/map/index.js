@@ -24,16 +24,14 @@ export async function getStaticProps() {
         "Content-Type": "application/json",
       },
     });
+    const stopsJson = await stopsRes.json();
     const routeRes = await fetch(`${domainUrl}/api/routes`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    console.log("responses:", stopsRes.body, routeRes.body);
-    const stopsJson = await stopsRes.json();
     const routesJson = await routeRes.json();
-    console.log("jsons:", stopsJson, routesJson);
     let staticProps = { props: {} };
 
     if (!stopsJson.error) {
@@ -50,6 +48,6 @@ export async function getStaticProps() {
 
     return staticProps;
   } catch (e) {
-    throw e;
+    console.log(e);
   }
 }
