@@ -35,13 +35,13 @@ export async function getStaticProps() {
     let staticProps = { props: {} };
 
     if (!stopsJson.error) {
-      staticProps.props.stops = stopsJson.data;
+      staticProps.props.stops = JSON.parse(stopsJson.data);
     } else {
       staticProps.props.stops = [];
     }
 
     if (!stopsJson.error) {
-      staticProps.props.routes = routesJson.data;
+      staticProps.props.routes = JSON.parse(routesJson.data);
     } else {
       staticProps.props.routes = [];
     }

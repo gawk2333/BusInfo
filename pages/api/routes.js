@@ -14,7 +14,7 @@ export default async function handler(req, res) {
           .exec();
         res.json({
           error: false,
-          data: routes,
+          data: JSON.stringify(routes),
         });
         break;
     }

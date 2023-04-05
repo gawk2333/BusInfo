@@ -15,7 +15,7 @@ export default async function handler(req, res) {
           .exec();
         res.json({
           error: false,
-          data: stops,
+          data: JSON.stringify(stops),
         });
         break;
     }
