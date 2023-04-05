@@ -3,8 +3,8 @@ import { initDefaultConnection } from "@/lib/mongodb/mongodb";
 
 const domainUrl =
   process.env.NODE_ENV === "production"
-    ? process.env.VERCEL_URL
-    : "localhost:3000";
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000";
 
 export default function MapPage({ stops, routes }) {
   const Map = dynamic(() => import("@/components/Map"), {
@@ -18,13 +18,13 @@ export async function getStaticProps() {
     console.log(" CONNECTED TO MONGO ");
   });
   try {
-    const stopsRes = await fetch(`http://${domainUrl}/api/stops`, {
+    const stopsRes = await fetch(`${domainUrl}/api/stops`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const routeRes = await fetch(`http://${domainUrl}/api/routes`, {
+    const routeRes = await fetch(`${domainUrl}/api/routes`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
