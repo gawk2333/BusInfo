@@ -3,9 +3,6 @@ import ShapesModel from "@/lib/models/shapes.model.js";
 
 export default async function handler(req, res) {
   try {
-    // `await clientPromise` will use the default database passed in the MONGODB_URI
-    // However you can use another database (e.g. myDatabase) by replacing the `await clientPromise` with the following code:
-    //
     const { routeId } = req.body;
 
     switch (req.method) {
@@ -25,7 +22,6 @@ export default async function handler(req, res) {
             return trip;
           })
         );
-        console.log("unique", uniqueTrips);
         if (uniqueTrips) {
           const shapeInfo = await ShapesModel.aggregate([
             {
@@ -44,7 +40,6 @@ export default async function handler(req, res) {
               },
             },
           ]).exec();
-          console.log(shapeInfo);
           if (shapeInfo && shapeInfo.length !== 0) {
             const shapes = shapeInfo.map((shape) => {
               const sortedShapePts = shape.shape_pts

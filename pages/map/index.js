@@ -17,44 +17,40 @@ export async function getStaticProps() {
   initDefaultConnection().then(async () => {
     console.log(" CONNECTED TO MONGO ");
   });
-  try {
-    const stopsRes = await fetch(`${domainUrl}/api/stops`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const stopsJson = await stopsRes.json();
-    const routeRes = await fetch(`${domainUrl}/api/routes`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const routesJson = await routeRes.json();
-    console.log("stops", JSON.parse(stopsJson));
-    return {
-      props: {
-        stops: JSON.parse(stopsJson.data),
-        routes: JSON.parse(routesJson.data),
-      },
-    };
-    // let staticProps = { props: {} };
+  const stopsRes = await fetch(`${domainUrl}/api/stops`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const stopsJson = await stopsRes.json();
+  const routeRes = await fetch(`${domainUrl}/api/routes`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const routesJson = await routeRes.json();
+  console.log("stops", JSON.parse(stopsJson.data));
+  return {
+    props: {
+      stops: JSON.parse(stopsJson.data),
+      routes: JSON.parse(routesJson.data),
+    },
+  };
+  // let staticProps = { props: {} };
 
-    // if (!stopsJson.error) {
-    //   staticProps.props.stops = JSON.parse(stopsJson.data);
-    // } else {
-    //   staticProps.props.stops = [];
-    // }
+  // if (!stopsJson.error) {
+  //   staticProps.props.stops = JSON.parse(stopsJson.data);
+  // } else {
+  //   staticProps.props.stops = [];
+  // }
 
-    // if (!stopsJson.error) {
-    //   staticProps.props.routes = JSON.parse(routesJson.data);
-    // } else {
-    //   staticProps.props.routes = [];
-    // }
+  // if (!stopsJson.error) {
+  //   staticProps.props.routes = JSON.parse(routesJson.data);
+  // } else {
+  //   staticProps.props.routes = [];
+  // }
 
-    // return staticProps;
-  } catch (e) {
-    console.log(e);
-  }
+  // return staticProps;
 }

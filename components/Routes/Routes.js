@@ -79,7 +79,6 @@ export default function Routes({ routes }) {
 
   useEffect(() => {
     fetchTripsLayer();
-    console.log("trips", fetchedTrips);
   }, [fetchTripsLayer, fetchedTrips]);
 
   return (
