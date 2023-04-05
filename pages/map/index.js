@@ -32,7 +32,7 @@ export async function getStaticProps() {
     });
     const stopsJson = await stopsRes.json();
     const routesJson = await routeRes.json();
-
+    console.log("responses:", stopsJson, routesJson);
     let staticProps = { props: {} };
 
     if (!stopsJson.error) {
