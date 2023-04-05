@@ -32,21 +32,28 @@ export async function getStaticProps() {
       },
     });
     const routesJson = await routeRes.json();
-    let staticProps = { props: {} };
+    console.log("stops", JSON.parse(stopsJson));
+    return {
+      props: {
+        stops: JSON.parse(stopsJson.data),
+        routes: JSON.parse(routesJson.data),
+      },
+    };
+    // let staticProps = { props: {} };
 
-    if (!stopsJson.error) {
-      staticProps.props.stops = JSON.parse(stopsJson.data);
-    } else {
-      staticProps.props.stops = [];
-    }
+    // if (!stopsJson.error) {
+    //   staticProps.props.stops = JSON.parse(stopsJson.data);
+    // } else {
+    //   staticProps.props.stops = [];
+    // }
 
-    if (!stopsJson.error) {
-      staticProps.props.routes = JSON.parse(routesJson.data);
-    } else {
-      staticProps.props.routes = [];
-    }
+    // if (!stopsJson.error) {
+    //   staticProps.props.routes = JSON.parse(routesJson.data);
+    // } else {
+    //   staticProps.props.routes = [];
+    // }
 
-    return staticProps;
+    // return staticProps;
   } catch (e) {
     console.log(e);
   }
