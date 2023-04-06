@@ -17,21 +17,10 @@ export async function getStaticProps() {
   initDefaultConnection().then(async () => {
     console.log(" CONNECTED TO MONGO ");
   });
-  const stopsRes = await fetch(`${domainUrl}/api/stops`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const stopsRes = await fetch(`${domainUrl}/api/stops`);
   const stopsJson = await stopsRes.json();
-  const routeRes = await fetch(`${domainUrl}/api/routes`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const routeRes = await fetch(`${domainUrl}/api/routes`);
   const routesJson = await routeRes.json();
-  console.log("stops", JSON.parse(stopsJson.data));
   return {
     props: {
       stops: JSON.parse(stopsJson.data),
