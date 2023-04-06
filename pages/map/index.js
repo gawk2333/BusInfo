@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import { initDefaultConnection } from "@/lib/mongodb/mongodb";
+import fetch from "node-fetch";
 
 const domainUrl =
   process.env.NODE_ENV === "production"
