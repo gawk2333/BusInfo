@@ -1,6 +1,6 @@
 import StopsModel from "@/lib/models/stops.model";
 
-export default async function handler(req, res) {
+export async function getAllStops() {
   try {
     const stops = await StopsModel.find({})
       .select({
@@ -11,14 +11,14 @@ export default async function handler(req, res) {
         stop_lon: 1,
       })
       .exec();
-    res.json({
+    return {
       error: false,
-      data: JSON.stringify(stops),
-    });
+      data: stops,
+    };
   } catch (e) {
-    res.json({
+    return {
       error: true,
       message: `Database Error: ${e}`,
-    });
+    };
   }
 }

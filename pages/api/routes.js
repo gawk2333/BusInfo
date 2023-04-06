@@ -1,6 +1,6 @@
 import RoutesModel from "@/lib/models/routes.model";
 
-export default async function handler(req, res) {
+export async function getAllRoutes() {
   try {
     const routes = await RoutesModel.find({})
       .select({
@@ -10,14 +10,14 @@ export default async function handler(req, res) {
         route_text_color: 1,
       })
       .exec();
-    res.json({
+    return {
       error: false,
-      data: JSON.stringify(routes),
-    });
+      data: routes,
+    };
   } catch (e) {
-    res.json({
+    return {
       error: true,
       message: `Database Error: ${e}`,
-    });
+    };
   }
 }
